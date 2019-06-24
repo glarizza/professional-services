@@ -179,9 +179,10 @@ like:
 
 ```
 Function execution started
+{"message": "Processing VM deletion event", "event_type": "GCE_API_CALL", "project": "user-dev-242122", "zone": "us-west1-a", "instance": "test"}
 {"message": "<HttpError 404 when requesting https://www.googleapis.com/compute/v1/projects/user-dev-242122/zones/us-west1-a/instances/test?alt=json returned \"The resource 'projects/user-dev-242122/zones/us-west1-a/instances/test' was not found\">"}
-{"instance": "test", "message": "Could not get IP address. Obtaining the IP is not guaranteed because of race condition with VM deletion. Aborting with no action taken"}
-Function execution took 1910 ms, finished with status: 'ok'
+{"message": "Could not get IP address. Obtaining the IP is not guaranteed because of race condition with VM deletion.  Aborting with no action taken", "reason": "IP_NOT_AVAILABLE", "project": "user-dev-242122", "zone": "us-west1-a", "instance": "test"}
+Function execution took 907 ms, finished with status: 'ok'
 ```
 
 A successful deletion looks like:

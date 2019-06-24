@@ -1,0 +1,1102 @@
+[
+  {
+    "textPayload": "Function execution took 1358 ms, finished with status: 'ok'",
+    "insertId": "000000-4328c78e-90ae-4718-8d11-a1172e316112",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:58.968641896Z",
+    "severity": "DEBUG",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "{\"message\": \"Could not get IP address. Obtaining the IP is not guaranteed because of race condition with VM deletion.  Aborting with no action taken\", \"reason\": \"IP_NOT_AVAILABLE\", \"project\": \"user-dev-242122\", \"zone\": \"us-west1-a\", \"instance\": \"test\"}",
+    "insertId": "000003-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:58.967Z",
+    "severity": "ERROR",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "{\"message\": \"Could not get IP address. Obtaining the IP is not guaranteed because of race condition with VM deletion.  Aborting with no action taken\", \"reason\": \"IP_NOT_AVAILABLE\", \"project\": \"user-dev-242122\", \"zone\": \"us-west1-a\", \"instance\": \"test\"}",
+    "insertId": "000002-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:58.967Z",
+    "severity": "ERROR",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "{\"message\": \"<HttpError 404 when requesting https://www.googleapis.com/compute/v1/projects/user-dev-242122/zones/us-west1-a/instances/test?alt=json returned \\\"The resource 'projects/user-dev-242122/zones/us-west1-a/instances/test' was not found\\\">\"}",
+    "insertId": "000001-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "function_name": "dns_vm_gc",
+        "project_id": "dns-logging",
+        "region": "us-central1"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:58.967Z",
+    "severity": "ERROR",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "{\"message\": \"<HttpError 404 when requesting https://www.googleapis.com/compute/v1/projects/user-dev-242122/zones/us-west1-a/instances/test?alt=json returned \\\"The resource 'projects/user-dev-242122/zones/us-west1-a/instances/test' was not found\\\">\"}",
+    "insertId": "000000-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:58.967Z",
+    "severity": "ERROR",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "{\"message\": \"Processing VM deletion event\", \"event_type\": \"GCE_API_CALL\", \"project\": \"user-dev-242122\", \"zone\": \"us-west1-a\", \"instance\": \"test\"}",
+    "insertId": "000002-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.881Z",
+    "severity": "ERROR",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "{\"message\": \"Processing VM deletion event\", \"event_type\": \"GCE_API_CALL\", \"project\": \"user-dev-242122\", \"zone\": \"us-west1-a\", \"instance\": \"test\"}",
+    "insertId": "000001-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "function_name": "dns_vm_gc",
+        "project_id": "dns-logging",
+        "region": "us-central1"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.881Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "{'handlers': [<StreamHandler (NOTSET)>, <StreamHandler (WARNING)>, <CloudLoggingHandler (NOTSET)>, <StreamHandler (NOTSET)>]}",
+    "insertId": "000000-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "function_name": "dns_vm_gc",
+        "project_id": "dns-logging",
+        "region": "us-central1"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.881Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "X_GOOGLE_WORKER_PORT: 8091",
+    "insertId": "000036-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "X_GOOGLE_SUPERVISOR_INTERNAL_PORT: 8081",
+    "insertId": "000035-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "X_GOOGLE_SUPERVISOR_HOSTNAME: 169.254.8.129",
+    "insertId": "000034-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "X_GOOGLE_LOAD_ON_START: false",
+    "insertId": "000033-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "X_GOOGLE_GCP_PROJECT: dns-logging",
+    "insertId": "000032-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "X_GOOGLE_GCLOUD_PROJECT: dns-logging",
+    "insertId": "000031-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "X_GOOGLE_FUNCTION_VERSION: 51",
+    "insertId": "000030-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "X_GOOGLE_FUNCTION_TRIGGER_TYPE: CLOUD_PUBSUB_TRIGGER",
+    "insertId": "000029-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "X_GOOGLE_FUNCTION_TIMEOUT_SEC: 60",
+    "insertId": "000028-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "X_GOOGLE_FUNCTION_REGION: us-central1",
+    "insertId": "000027-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "X_GOOGLE_FUNCTION_NAME: dns_vm_gc",
+    "insertId": "000026-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "X_GOOGLE_FUNCTION_MEMORY_MB: 256",
+    "insertId": "000025-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "X_GOOGLE_FUNCTION_IDENTITY: dns-vm-gc@dns-logging.iam.gserviceaccount.com",
+    "insertId": "000024-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "X_GOOGLE_ENTRY_POINT: dns_vm_gc",
+    "insertId": "000023-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "function_name": "dns_vm_gc",
+        "project_id": "dns-logging",
+        "region": "us-central1"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "X_GOOGLE_CONTAINER_LOGGING_ENABLED: false",
+    "insertId": "000022-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "X_GOOGLE_CODE_LOCATION: /user_code",
+    "insertId": "000021-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "WORKER_PORT: 8091",
+    "insertId": "000020-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "VIRTUAL_ENV: /env",
+    "insertId": "000019-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "SUPERVISOR_INTERNAL_PORT: 8081",
+    "insertId": "000018-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "function_name": "dns_vm_gc",
+        "project_id": "dns-logging",
+        "region": "us-central1"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "SUPERVISOR_HOSTNAME: 169.254.8.129",
+    "insertId": "000017-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "PWD: /user_code",
+    "insertId": "000016-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "PORT: 8080",
+    "insertId": "000015-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "PATH: /env/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "insertId": "000014-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "NODE_ENV: production",
+    "insertId": "000013-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "LC_CTYPE: C.UTF-8",
+    "insertId": "000012-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "HOME: /tmp",
+    "insertId": "000011-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "GCP_PROJECT: dns-logging",
+    "insertId": "000010-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "GCLOUD_PROJECT: dns-logging",
+    "insertId": "000009-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "FUNCTION_TRIGGER_TYPE: CLOUD_PUBSUB_TRIGGER",
+    "insertId": "000008-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "FUNCTION_TIMEOUT_SEC: 60",
+    "insertId": "000007-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "FUNCTION_REGION: us-central1",
+    "insertId": "000006-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "FUNCTION_NAME: dns_vm_gc",
+    "insertId": "000005-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "FUNCTION_MEMORY_MB: 256",
+    "insertId": "000004-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "FUNCTION_IDENTITY: dns-vm-gc@dns-logging.iam.gserviceaccount.com",
+    "insertId": "000003-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "ENTRY_POINT: dns_vm_gc",
+    "insertId": "000002-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "DNS_VM_GC_DNS_ZONES: nonprod-private-zone,prod-private-zone",
+    "insertId": "000001-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "DNS_VM_GC_DNS_PROJECT: dnsregistration",
+    "insertId": "000000-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.625Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "DEBIAN_FRONTEND: noninteractive",
+    "insertId": "000008-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.624Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "CODE_LOCATION: /user_code",
+    "insertId": "000007-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.624Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "ENVIORNMENT",
+    "insertId": "000006-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "function_name": "dns_vm_gc",
+        "project_id": "dns-logging",
+        "region": "us-central1"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.624Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "Resource Attributes: ['__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'clear', 'copy', 'fromkeys', 'get', 'items', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values']",
+    "insertId": "000005-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "function_name": "dns_vm_gc",
+        "project_id": "dns-logging",
+        "region": "us-central1"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.624Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "Resource: {'service': 'pubsub.googleapis.com', 'name': 'projects/dns-logging/topics/dns-vm-gc'}",
+    "insertId": "000004-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "function_name": "dns_vm_gc",
+        "project_id": "dns-logging",
+        "region": "us-central1"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.624Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "Event type: google.pubsub.topic.publish",
+    "insertId": "000003-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "function_name": "dns_vm_gc",
+        "project_id": "dns-logging",
+        "region": "us-central1"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.624Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "Event ID: cdfce8cc-1886-47c4-bdc5-59dfa643db7f",
+    "insertId": "000002-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.624Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "Setting up logging because logging_setup_done is False",
+    "insertId": "000001-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "function_name": "dns_vm_gc",
+        "project_id": "dns-logging",
+        "region": "us-central1"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.624Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "{'handlers': [<StreamHandler (NOTSET)>, <StreamHandler (WARNING)>]}",
+    "insertId": "000000-0b2b67b9-9435-4cd1-9b8e-52b6c2155bad",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.624Z",
+    "severity": "INFO",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  },
+  {
+    "textPayload": "Function execution started",
+    "insertId": "000000-326c4373-9167-4f7e-a7a5-8bf7ba5760c8",
+    "resource": {
+      "type": "cloud_function",
+      "labels": {
+        "project_id": "dns-logging",
+        "region": "us-central1",
+        "function_name": "dns_vm_gc"
+      }
+    },
+    "timestamp": "2019-06-24T18:23:57.611534043Z",
+    "severity": "DEBUG",
+    "labels": {
+      "execution_id": "xkb7iuczceap"
+    },
+    "logName": "projects/dns-logging/logs/cloudfunctions.googleapis.com%2Fcloud-functions",
+    "trace": "projects/dns-logging/traces/b9222884f68d1eb73acdb32185b01e16",
+    "receiveTimestamp": "2019-06-24T18:24:03.930191854Z"
+  }
+]
