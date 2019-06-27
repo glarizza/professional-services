@@ -161,6 +161,16 @@ class LostRace(LogEvent):
     SEVERITY = 'WARNING'
     RESULT = 'NOT_PROCESSED'
 
+class VmNoIp(LogEvent):
+    MESSAGE = "{} has no IP address"
+    SEVERITY = 'INFO'
+    RESULT = 'OK'
+
+class DnsRecordDeleted(LogEvent):
+    MESSAGE = "{} matches DNS records"
+    SEVERITY = 'INFO'
+    RESULT = 'OK'
+
 
 class EventHandler():
     """Handles a single event.
@@ -271,12 +281,14 @@ class EventHandler():
 
         instance = self.get_instance(self.project, self.zone, self.vm_name)
         if not instance:
-            self.log_result(Result.NOT_PROCESSED, Detail.LOST_RACE)
+            self.log_event(LostRace(self.vm_uri, self.event_id))
+            #self.log_result(Result.NOT_PROCESSED, Detail.LOST_RACE)
             return 0
 
         ip = self.ip_address(instance)
         if not ip:
-            self.log_result(Result.OK, Detail.VM_NO_IP)
+            self.log_event(VmNoIp(self.vm_uri, self.event_id))
+            #self.log_result(Result.OK, Detail.VM_NO_IP)
             return 0
 
         num_deleted = 0
@@ -291,7 +303,8 @@ class EventHandler():
             detail = Detail.DELETED
         else:
             detail = Detail.NO_MATCHES
-        self.log_result(Result.OK, detail, num_deleted)
+        self.log_event(DnsRecordDeleted(self.vm_uri, self.event_id))
+        #self.log_result(Result.OK, detail, num_deleted)
         return num_deleted
 
     def log_struct(self, msg: str, struct: dict = {}, **kw):
