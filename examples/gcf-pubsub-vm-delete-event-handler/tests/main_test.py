@@ -148,7 +148,7 @@ def app_warm(app, monkeypatch):
 
 
 @pytest.fixture
-def app_cold(monkeypatch):
+def app_cold(monkeypatch, mock_env, mock_session, mock_http):
     """When the function executes from a cold start"""
     monkeypatch.setattr(RuntimeState, 'app', None)
     return None
