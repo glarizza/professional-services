@@ -19,10 +19,11 @@ import json
 import logging
 import os
 import google.cloud.logging
+from enum import Enum
 from google.cloud.logging.resource import Resource
 from googleapiclient import discovery
 from googleapiclient.errors import HttpError
-from typing import List, Optional
+from typing import List
 
 
 class RuntimeState:
@@ -30,6 +31,30 @@ class RuntimeState:
 
 
 RuntimeState.app = None
+
+
+class Result(Enum):
+    """Results of the cleanup.
+
+    A NOT_PROCESSED results is likely a result of losing the race against the
+    VM delete operation and is intended to signal to the user they may need to
+    cleanup DNS records using another mechanism (e.g. manually).
+    """
+    OK = 0
+    NOT_PROCESSED = 1
+
+
+class Detail(Enum):
+    """Detailed results of the cleanup
+
+    A LOST_RACE result indicates user intervention is necessary.
+    """
+    NO_OP = 0
+    NO_MATCHES = 1
+    DELETED = 2
+    VM_NO_IP = 3
+    IGNORED_EVENT = 4
+    LOST_RACE = 5
 
 
 class EventHandler():
@@ -43,6 +68,24 @@ class EventHandler():
         "because of race condition with VM deletion.  "
         "Aborting with no action taken"
     )
+
+    RESULT_DETAIL_MESSAGES = {
+        Detail.NO_OP: "{} No action taken",
+        Detail.NO_MATCHES: "{} matches no DNS records",
+        Detail.DELETED: "{} matches DNS records",
+        Detail.VM_NO_IP: "{} has no IP address",
+        Detail.LOST_RACE: "{} does not exist likely (LOST_RACE)",
+        Detail.IGNORED_EVENT: (
+            "No action taken, event_type is not GCE_API_CALL for {}"
+        ),
+    }
+
+    RESULT_SEVERITY = {
+        Detail.NO_OP: 'INFO',
+        Detail.VM_NO_IP: 'INFO',
+        Detail.IGNORED_EVENT: 'INFO',
+        Detail.LOST_RACE: 'WARNING',
+    }
 
     def __init__(self, app, data, context=None):
         self.config = self.load_configuration()
@@ -85,6 +128,20 @@ class EventHandler():
             'dns_zones': zones,
         }
 
+    def log_result(self, result: Result, detail: Detail, num_deleted: int = 0):
+        """Logs the final results for reporting via structured logs"""
+        msg = self.RESULT_DETAIL_MESSAGES[detail].format(self.vm_uri)
+        self.log.info(msg)
+        self.log_struct(
+            msg,
+            {
+                'result': result.name,
+                'detail': detail.name,
+                'num_deleted': num_deleted,
+            },
+            severity=self.RESULT_SEVERITY.get(detail, 'NOTICE')
+        )
+
     def run(self):
         """Processes an event"""
         msg = "Handling event_id='{}' vm='{}'".format(
@@ -93,10 +150,17 @@ class EventHandler():
         )
         self.log.info(msg)
         if not self.validate_event_type(self.type):
+            self.log_result(Result.OK, Detail.IGNORED_EVENT)
             return 0
 
-        ip = self.ip_address(self.project, self.zone, self.vm_name)
+        instance = self.get_instance(self.project, self.zone, self.vm_name)
+        if not instance:
+            self.log_result(Result.NOT_PROCESSED, Detail.LOST_RACE)
+            return 0
+
+        ip = self.ip_address(instance)
         if not ip:
+            self.log_result(Result.OK, Detail.VM_NO_IP)
             return 0
 
         num_deleted = 0
@@ -107,6 +171,11 @@ class EventHandler():
             for record in candidates:
                 self.delete_record(dns_project, zone, record)
                 num_deleted += 1
+        if num_deleted > 0:
+            detail = Detail.DELETED
+        else:
+            detail = Detail.NO_MATCHES
+        self.log_result(Result.OK, detail, num_deleted)
         return num_deleted
 
     def log_struct(self, msg: str, struct: dict = {}, **kw):
@@ -199,7 +268,7 @@ class EventHandler():
             body=change)
         response = request.execute()
         struct = {
-            'reason': "DELETE_MATCHING_RECORD",
+            'action': "DELETED",
             'dns_project': project,
             'dns_managed_zone': managed_zone,
             'dns_record': record,
@@ -208,7 +277,7 @@ class EventHandler():
         msg = "DNS Record {} deleted, matched {} ({})".format(
             record['name'],
             self.vm_uri,
-            struct['reason'],
+            struct['action'],
         )
         self.log.info(msg)
         self.log_struct(msg, struct=struct, severity='NOTICE')
@@ -221,7 +290,7 @@ class EventHandler():
         """Identifies DNS records to delete.
 
         Records are included in the results to be deleted if:
-        1. The leftmost portion of the DNS Record name matches the instance name.
+        1. The leftmost portion of the DNS Record name matches the vm name.
         2. AND the rrdatas value has exactly one value matching the ip.
         3. AND the DNS record type is 'A'
 
@@ -242,33 +311,18 @@ class EventHandler():
             candidates.append(record)
         return candidates
 
-    def ip_address(self, project, zone, vm_name):
+    def ip_address(self, instance):
         """Parses the primary network IP from a VM instance Resource.
 
         Args:
         Returns: (string) ip address or None if IP not found
         """
         ip = None
-        msg = "Could not get IP of {}.".format(self.vm_uri)
-
-        instance = self.get_instance(project, zone, vm_name)
-        if not instance:
-            self.log.warning(msg + " (VM_NOT_FOUND)")
-            log_struct = {'reason': 'VM_NOT_FOUND'}
-            self.log_struct(msg, log_struct, severity='WARNING')
-            return None
-
         if 'networkInterfaces' in instance:
             networkInterfaces = instance['networkInterfaces']
             if networkInterfaces:
                 if 'networkIP' in networkInterfaces[0]:
                     ip = networkInterfaces[0]['networkIP']
-
-        if not ip:
-            log_struct = {'reason': 'VM_FOUND_MISSING_IP'}
-            self.log.warning(msg + " (VM_FOUND_MISSING_IP)")
-            self.log_struct(msg, log_struct, severity='WARNING')
-
         return ip
 
     def get_instance(self, project, compute_zone, instance):
@@ -333,10 +387,6 @@ class EventHandler():
         """
         if event_type == 'GCE_API_CALL':
             return True
-        msg = "No action taken.  event_type='{}' is not 'GCE_API_CALL'".format(
-            event_type
-        )
-        self.log.info(msg)
         return False
 
 

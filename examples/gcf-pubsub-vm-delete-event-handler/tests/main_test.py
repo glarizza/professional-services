@@ -177,25 +177,16 @@ def test_config_no_zones(mock_env_no_zones, app, trigger_event):
     assert "Env var DNS_VM_GC_DNS_ZONES is required" in str(err.value)
 
 
-def test_ip_address(handler, mock_http, caplog):
-    # Mock response to get_instance() API call.
-    mock_http.append(({'status': '200'}, readfile('instance.json')))
-    ip = handler.ip_address('user-dev-242122', 'us-west1-a', 'testw2')
+def test_ip_address(handler, mock_instance_resource, caplog):
+    ip = handler.ip_address(mock_instance_resource)
     assert ip == "10.138.0.44"
 
 
-def test_ip_address_no_network(handler, mock_http, caplog):
-    mock_http.append(({'status': '200'}, readfile('instance-no-network.json')))
-    ip = handler.ip_address('user-dev-242122', 'us-west1-a', 'testw2')
-    assert 'VM_FOUND_MISSING_IP' in caplog.text
-    assert ip is None
-
-
-def test_ip_address_when_vm_not_found(handler, mock_http, caplog):
-    """Aborts when the race against the VM delete operation is lost."""
-    mock_http.append(({'status': '404'}, ''))
-    ip = handler.ip_address('user-dev-242122', 'us-west1-a', 'testw2')
-    assert 'VM_NOT_FOUND' in caplog.text
+def test_ip_address_no_network(
+        handler,
+        mock_instance_resource_no_network,
+        caplog):
+    ip = handler.ip_address(mock_instance_resource_no_network)
     assert ip is None
 
 
@@ -203,7 +194,7 @@ def test_main_when_vm_not_found(app, mock_http, trigger_event, caplog):
     """Integration test when VM delete operation is lost."""
     mock_http.append(({'status': '404'}, ''))
     num_deleted = app.handle_event(trigger_event)
-    assert 'VM_NOT_FOUND' in caplog.text
+    assert 'LOST_RACE' in caplog.text
     assert 0 == num_deleted
 
 
