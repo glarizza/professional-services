@@ -42,6 +42,23 @@ class Result(Enum):
     """
     OK = 0
     NOT_PROCESSED = 1
+    NOT_DEFINED = 2
+
+
+class Severity(Enum):
+    """Stackdriver severity levels
+
+    See https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
+    """
+    DEFAULT = 0
+    DEBUG = 100
+    INFO = 200
+    NOTICE = 300
+    WARNING = 400
+    ERROR = 500
+    CRITICAL = 600
+    ALERT = 700
+    EMERGENCY = 800
 
 
 class Detail(Enum):
@@ -55,6 +72,94 @@ class Detail(Enum):
     VM_NO_IP = 3
     IGNORED_EVENT = 4
     LOST_RACE = 5
+    NOT_DEFINED = 6
+
+
+class LogEvent(object):
+    """Base class for consistent structured logs"""
+    MESSAGE = "{} - Override this attributes"
+    SEVERITY = Severity.NOTICE
+    DETAIL = Detail.NOT_DEFINED
+    RESULT = Result.NOT_DEFINED
+
+    def __init__(self, vm_uri: str, event_id: str):
+        self.vm_uri = vm_uri
+        self.event_id = event_id
+        self.function_project = os.getenv('GCP_PROJECT')
+        self.function_region = os.getenv('FUNCTION_REGION')
+        self.function_name = os.getenv('FUNCTION_NAME')
+        # TODO(jmccune) Should the log stream be env configurable?  YAGNI?
+        self.log_name = (
+            'projects/{}/logs/{}-testing'
+        ).format(self.function_project, self.function_name)
+
+    def message(self):
+        """Returns a human readable log message"""
+        return self.MESSAGE.format(self.vm_uri)
+
+    def result(self):
+        """Result code of the DNS cleanup, e.g. OK or NOT_PROCESSED"""
+        return self.RESULT.name
+
+    def detail(self):
+        """Detail code of the DNS cleanup, e.g. NO_OP, DELETED, LOST_RACE"""
+        return self.DETAIL.name
+
+    def info(self):
+        """Assembles dict intended for jsonPayload"""
+        return {'message': self.message, 'vm_uri': self.vm_uri}
+
+    def log_entry(self):
+        """Assembles dict intended for use as LogEntry
+
+        This structure is generally passed as keyword arguments to the
+        google.cloud.logging.log_struct() function.
+        """
+        resource_labels = {
+            'function_name': self.function_name,
+            'project_id': self.function_project,
+            'region': self.function_region,
+        }
+        resource = Resource(labels=resource_labels, type='cloud_function')
+        log_entry = {
+            'log_name': self.log_name,
+            'labels': {
+                'event_id': self.event_id,
+            },
+            'severity': 'INFO',
+            'resource': resource,
+        }
+        return log_entry
+
+    def severity(self):
+        """Stackdriver Log Severity
+
+        https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
+        """
+        return 'NOTICE'
+
+
+class NoOp(LogEvent):
+    MESSAGE = "{} No action taken"
+
+
+class IgnoredEventSubtype(LogEvent):
+    """Log for when pub/sub event subtype is ignored e.g. GCE_OPERATION_DONE"""
+    MESSAGE = "No action taken, event_type is not GCE_API_CALL for {}"
+    SEVERITY = Severity.DEBUG
+    RESULT = Result.OK
+
+
+class NoMatches(LogEvent):
+    MESSAGE = "{} matches no DNS records"
+    SEVERITY = Severity.DEBUG
+    RESULT = Result.OK
+
+
+class LostRace(LogEvent):
+    MESSAGE = "{} does not exist, likely lost race (LOST_RACE)"
+    SEVERITY = 'WARNING'
+    RESULT = 'NOT_PROCESSED'
 
 
 class EventHandler():
@@ -74,9 +179,9 @@ class EventHandler():
         Detail.NO_MATCHES: "{} matches no DNS records",
         Detail.DELETED: "{} matches DNS records",
         Detail.VM_NO_IP: "{} has no IP address",
-        Detail.LOST_RACE: "{} does not exist likely (LOST_RACE)",
+        Detail.LOST_RACE: "{} does not exist, likely lost race (LOST_RACE)",
         Detail.IGNORED_EVENT: (
-            "No action taken, event_type is not GCE_API_CALL for {}"
+            
         ),
     }
 
@@ -129,7 +234,12 @@ class EventHandler():
             'dns_zones': zones,
         }
 
-    def log_result(self, result: Result, detail: Detail, num_deleted: int = 0):
+    def log_event(self, event: LogEvent):
+        """Logs a structured event intended for end user reporting"""
+        self.log.info(event.message)
+        self.cloud_log.log_struct(info=event.info, **event.log_entry)
+
+    def log_result_old(self, result: Result, detail: Detail, num_deleted: int = 0):
         """Logs the final results for reporting via structured logs"""
         severity = self.RESULT_SEVERITY.get(detail, 'NOTICE')
         if severity == 'DEBUG' and not self.debug:
@@ -149,7 +259,8 @@ class EventHandler():
     def run(self):
         """Processes an event"""
         if not self.validate_event_type(self.type):
-            self.log_result(Result.OK, Detail.IGNORED_EVENT)
+            # self.log_result(Result.OK, Detail.IGNORED_EVENT)
+            self.log_event(IgnoredEventSubtype(self.vm_uri, self.event_id))
             return 0
 
         msg = "Handling event_id='{}' vm='{}'".format(
