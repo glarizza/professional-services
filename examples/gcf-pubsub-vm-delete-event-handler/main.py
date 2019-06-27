@@ -154,28 +154,33 @@ class IgnoredEventSubtype(LogEvent):
     MESSAGE = "No action taken, event_type is not GCE_API_CALL for {}"
     SEVERITY = Severity.DEBUG
     RESULT = Result.OK
+    LEVEL = logging.DEBUG
 
 
 class NoMatches(LogEvent):
     MESSAGE = "{} matches no DNS records"
     SEVERITY = Severity.DEBUG
     RESULT = Result.OK
+    LEVEL = logging.DEBUG
 
 
 class LostRace(LogEvent):
     MESSAGE = "{} does not exist, likely lost race (LOST_RACE)"
-    SEVERITY = 'WARNING'
-    RESULT = 'NOT_PROCESSED'
+    SEVERITY = Severity.WARNING
+    RESULT = Result.OK
+    LEVEL = logging.WARNING
 
 class VmNoIp(LogEvent):
     MESSAGE = "{} has no IP address"
-    SEVERITY = 'INFO'
-    RESULT = 'OK'
+    SEVERITY = Severity.INFO
+    RESULT = Result.OK
+    LEVEL = logging.INFO
 
 class DnsRecordDeleted(LogEvent):
     MESSAGE = "{} matches DNS records"
-    SEVERITY = 'INFO'
-    RESULT = 'OK'
+    SEVERITY = Severity.INFO
+    RESULT = Result.OK
+    LEVEL = logging.INFO
 
 
 class EventHandler():
@@ -252,7 +257,9 @@ class EventHandler():
 
     def log_event(self, event: LogEvent):
         """Logs a structured event intended for end user reporting"""
-        self.log.info(event.message())
+        if event.SEVERITY == Severity.DEBUG and not self.debug:
+            return
+        self.log.log(event.LEVEL, event.message())
         self.cloud_log.log_struct(info=event.info(), **event.log_entry())
 
     def log_result_old(self, result: Result, detail: Detail, num_deleted: int = 0):
@@ -275,7 +282,6 @@ class EventHandler():
     def run(self):
         """Processes an event"""
         if not self.validate_event_type(self.type):
-            # self.log_result(Result.OK, Detail.IGNORED_EVENT)
             self.log_event(IgnoredEventSubtype(self.vm_uri, self.event_id))
             return 0
 
@@ -288,13 +294,11 @@ class EventHandler():
         instance = self.get_instance(self.project, self.zone, self.vm_name)
         if not instance:
             self.log_event(LostRace(self.vm_uri, self.event_id))
-            #self.log_result(Result.NOT_PROCESSED, Detail.LOST_RACE)
             return 0
 
         ip = self.ip_address(instance)
         if not ip:
             self.log_event(VmNoIp(self.vm_uri, self.event_id))
-            #self.log_result(Result.OK, Detail.VM_NO_IP)
             return 0
 
         num_deleted = 0
@@ -310,7 +314,6 @@ class EventHandler():
         else:
             detail = Detail.NO_MATCHES
         self.log_event(DnsRecordDeleted(self.vm_uri, self.event_id))
-        #self.log_result(Result.OK, detail, num_deleted)
         return num_deleted
 
     def log_struct(self, msg: str, struct: dict = {}, **kw):

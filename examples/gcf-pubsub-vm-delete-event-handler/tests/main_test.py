@@ -141,6 +141,11 @@ def app(mock_env, mock_http, mock_session):
 
 
 @pytest.fixture
+def app_debug(mock_env_debug, mock_http, mock_session):
+    return DnsVmGcApp(http=mock_http, session=mock_session)
+
+
+@pytest.fixture
 def app_warm(app, monkeypatch):
     """When the function is warmed up from previous events"""
     monkeypatch.setattr(RuntimeState, 'app', app)
@@ -266,12 +271,9 @@ def test_gce_op_done_event(trigger_event_done, app, caplog):
     """The GCE_OPERATION_DONE event produces no log spam"""
     num_deleted = app.handle_event(trigger_event_done)
     assert '' == caplog.text
-    assert 0 == num_deleted
 
 
-def test_gce_op_done_event_debug(trigger_event_done,
-                                 app, caplog, mock_env_debug):
+def test_gce_op_done_event_debug(trigger_event_done, app_debug, caplog):
     """The GCE_OPERATION_DONE event logs when debug"""
-    num_deleted = app.handle_event(trigger_event_done)
+    num_deleted = app_debug.handle_event(trigger_event_done)
     assert 'No action taken' in caplog.text
-    assert 0 == num_deleted
