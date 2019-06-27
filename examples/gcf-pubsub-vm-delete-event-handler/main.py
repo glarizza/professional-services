@@ -107,7 +107,13 @@ class LogEvent(object):
 
     def info(self):
         """Assembles dict intended for jsonPayload"""
-        return {'message': self.message, 'vm_uri': self.vm_uri}
+        # TODO(jmccune) Consider JSON schema?  Reports generated against schema
+        return {
+            'message': self.message(),
+            'vm_uri': self.vm_uri,
+            'result': self.result(),
+            'detail': self.detail(),
+        }
 
     def log_entry(self):
         """Assembles dict intended for use as LogEntry
@@ -126,7 +132,7 @@ class LogEvent(object):
             'labels': {
                 'event_id': self.event_id,
             },
-            'severity': 'INFO',
+            'severity': self.severity(),
             'resource': resource,
         }
         return log_entry
@@ -246,8 +252,8 @@ class EventHandler():
 
     def log_event(self, event: LogEvent):
         """Logs a structured event intended for end user reporting"""
-        self.log.info(event.message)
-        self.cloud_log.log_struct(info=event.info, **event.log_entry)
+        self.log.info(event.message())
+        self.cloud_log.log_struct(info=event.info(), **event.log_entry())
 
     def log_result_old(self, result: Result, detail: Detail, num_deleted: int = 0):
         """Logs the final results for reporting via structured logs"""
