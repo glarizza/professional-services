@@ -74,13 +74,13 @@ class Detail(Enum):
     LOST_RACE = 5
     NOT_DEFINED = 6
 
-
 class LogEvent(object):
     """Base class for consistent structured logs"""
     MESSAGE = "{} - Override this attributes"
     SEVERITY = Severity.NOTICE
     DETAIL = Detail.NOT_DEFINED
     RESULT = Result.NOT_DEFINED
+    LEVEL = logging.INFO
 
     def __init__(self, vm_uri: str, event_id: str):
         self.vm_uri = vm_uri
@@ -104,6 +104,13 @@ class LogEvent(object):
     def detail(self):
         """Detail code of the DNS cleanup, e.g. NO_OP, DELETED, LOST_RACE"""
         return self.DETAIL.name
+
+    def severity(self):
+        """Stackdriver Log Severity
+
+        https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
+        """
+        return self.SEVERITY.name
 
     def info(self):
         """Assembles dict intended for jsonPayload"""
@@ -137,14 +144,6 @@ class LogEvent(object):
         }
         return log_entry
 
-    def severity(self):
-        """Stackdriver Log Severity
-
-        https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
-        """
-        return 'NOTICE'
-
-
 class NoOp(LogEvent):
     MESSAGE = "{} No action taken"
 
@@ -155,6 +154,7 @@ class IgnoredEventSubtype(LogEvent):
     SEVERITY = Severity.DEBUG
     RESULT = Result.OK
     LEVEL = logging.DEBUG
+    DETAIL = Detail.IGNORED_EVENT
 
 
 class NoMatches(LogEvent):
@@ -162,25 +162,30 @@ class NoMatches(LogEvent):
     SEVERITY = Severity.DEBUG
     RESULT = Result.OK
     LEVEL = logging.DEBUG
+    DETAIL = Detail.NO_MATCHES
 
 
 class LostRace(LogEvent):
     MESSAGE = "{} does not exist, likely lost race (LOST_RACE)"
     SEVERITY = Severity.WARNING
-    RESULT = Result.OK
+    RESULT = Result.NOT_PROCESSED
     LEVEL = logging.WARNING
+    DETAIL = Detail.LOST_RACE
 
 class VmNoIp(LogEvent):
     MESSAGE = "{} has no IP address"
     SEVERITY = Severity.INFO
     RESULT = Result.OK
     LEVEL = logging.INFO
+    DETAIL = Detail.VM_NO_IP
 
+# TODO(jmccune): Rename this event to be a summary
 class DnsRecordDeleted(LogEvent):
     MESSAGE = "{} matches DNS records"
     SEVERITY = Severity.INFO
     RESULT = Result.OK
     LEVEL = logging.INFO
+    DETAIL = Detail.DELETED
 
 
 class EventHandler():
@@ -261,23 +266,6 @@ class EventHandler():
             return
         self.log.log(event.LEVEL, event.message())
         self.cloud_log.log_struct(info=event.info(), **event.log_entry())
-
-    def log_result_old(self, result: Result, detail: Detail, num_deleted: int = 0):
-        """Logs the final results for reporting via structured logs"""
-        severity = self.RESULT_SEVERITY.get(detail, 'NOTICE')
-        if severity == 'DEBUG' and not self.debug:
-            return
-        msg = self.RESULT_DETAIL_MESSAGES[detail].format(self.vm_uri)
-        self.log.info(msg)
-        self.log_struct(
-            msg,
-            {
-                'result': result.name,
-                'detail': detail.name,
-                'num_deleted': num_deleted,
-            },
-            severity=self.RESULT_SEVERITY.get(detail, 'NOTICE')
-        )
 
     def run(self):
         """Processes an event"""
@@ -417,6 +405,7 @@ class EventHandler():
             self.vm_uri,
             struct['action'],
         )
+        # TODO(jmccune): Convert these to LogEvent objects
         self.log.info(msg)
         self.log_struct(msg, struct=struct, severity='NOTICE')
         return response
