@@ -83,7 +83,7 @@ class EventHandler():
     RESULT_SEVERITY = {
         Detail.NO_OP: 'INFO',
         Detail.VM_NO_IP: 'INFO',
-        Detail.IGNORED_EVENT: 'INFO',
+        Detail.IGNORED_EVENT: 'DEBUG',
         Detail.LOST_RACE: 'WARNING',
     }
 
@@ -107,6 +107,7 @@ class EventHandler():
         self.function_project = os.getenv('GCP_PROJECT')
         self.function_region = os.getenv('FUNCTION_REGION')
         self.function_name = os.getenv('FUNCTION_NAME')
+        self.debug = True if os.getenv('DEBUG') else False
 
     def load_configuration(self):
         """Loads configuration from the environment
@@ -130,6 +131,9 @@ class EventHandler():
 
     def log_result(self, result: Result, detail: Detail, num_deleted: int = 0):
         """Logs the final results for reporting via structured logs"""
+        severity = self.RESULT_SEVERITY.get(detail, 'NOTICE')
+        if severity == 'DEBUG' and not self.debug:
+            return
         msg = self.RESULT_DETAIL_MESSAGES[detail].format(self.vm_uri)
         self.log.info(msg)
         self.log_struct(
@@ -144,14 +148,15 @@ class EventHandler():
 
     def run(self):
         """Processes an event"""
+        if not self.validate_event_type(self.type):
+            self.log_result(Result.OK, Detail.IGNORED_EVENT)
+            return 0
+
         msg = "Handling event_id='{}' vm='{}'".format(
             self.event_id,
             self.vm_uri
         )
         self.log.info(msg)
-        if not self.validate_event_type(self.type):
-            self.log_result(Result.OK, Detail.IGNORED_EVENT)
-            return 0
 
         instance = self.get_instance(self.project, self.zone, self.vm_name)
         if not instance:

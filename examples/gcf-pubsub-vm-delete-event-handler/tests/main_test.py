@@ -263,7 +263,15 @@ def test_multiple_calls(app_cold, mock_http, mock_session, trigger_event_done):
 
 
 def test_gce_op_done_event(trigger_event_done, app, caplog):
-    """The GCE_OPERATION_DONE event triggers no action taken"""
+    """The GCE_OPERATION_DONE event produces no log spam"""
+    num_deleted = app.handle_event(trigger_event_done)
+    assert '' == caplog.text
+    assert 0 == num_deleted
+
+
+def test_gce_op_done_event_debug(trigger_event_done,
+                                 app, caplog, mock_env_debug):
+    """The GCE_OPERATION_DONE event logs when debug"""
     num_deleted = app.handle_event(trigger_event_done)
     assert 'No action taken' in caplog.text
     assert 0 == num_deleted
